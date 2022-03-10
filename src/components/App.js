@@ -29,7 +29,6 @@ function App() {
   }
 
   function handleChangeAnswer(index, id) {
-    console.log(index, id)
     fetch(`http://localhost:4000/questions/${id}`, {
       method: "PATCH",
       headers: {
@@ -42,7 +41,7 @@ function App() {
     .then(r => r.json())
     .then(updatedQuestion => {
       const newQuestions = questions.filter(question => question.id !== id)
-      setQuestions([...newQuestions, updatedQuestion])
+      setQuestions([...newQuestions, updatedQuestion].sort((a, b) => a.id - b.id))
     })
   }
 
